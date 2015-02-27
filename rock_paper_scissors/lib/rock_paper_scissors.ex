@@ -18,6 +18,9 @@ defmodule RockPaperScissors do
       iex> RockPaperScissors.score({:p1, :scissors}, {:p2, :rock})
       :p2
   """
-  def score(t1, t2) do
-  end
+  def score({_, weapon}, {_, weapon}), do: :draw
+  def score({player1, :rock}, {_, :scissors}), do: player1
+  def score({player1, :scissors}, {_, :paper}), do: player1
+  def score({player1, :paper, {_, :rock}}), do: player1
+  def score(_, {player2, _}), do: player2
 end
