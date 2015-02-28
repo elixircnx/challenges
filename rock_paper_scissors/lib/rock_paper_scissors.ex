@@ -1,5 +1,5 @@
 defmodule RockPaperScissors do
-  @doc """
+  @moduledoc """
   Takes two tuples of the form {:playername, :weapon} and returns the winner.
 
   Rules:
@@ -18,6 +18,15 @@ defmodule RockPaperScissors do
       iex> RockPaperScissors.score({:p1, :scissors}, {:p2, :rock})
       :p2
   """
-  def score(t1, t2) do
+
+  def score({:p1, weapon}, {:p2, weapon}), do: :draw
+  def score({:p1, w1}, {:p2, w2}) do
+    win = [rock: 3, scissors: 2, paper: 1]
+    case win[w1] - win[w2] do
+      1 -> :p1
+      -1 -> :p2
+      2 -> :p2
+      -2 -> :p1
+    end
   end
 end
