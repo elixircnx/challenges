@@ -19,14 +19,17 @@ defmodule RockPaperScissors do
       :p2
   """
 
+  permutations = [{:rock, :scissors}, {:scissors, :paper}, {:paper, :rock}]
+  for {tool, weapon} <- permutations do
+    defp get_winner(unquote(tool), unquote(weapon)), do: :p1
+    defp get_winner(unquote(weapon), unquote(tool)), do: :p2
+  end
+  defp get_winner(_, _) do
+    raise ArgumentError, message: "Massive failure."
+  end
+
   def score({:p1, weapon}, {:p2, weapon}), do: :draw
   def score({:p1, w1}, {:p2, w2}) do
-    win = [rock: 3, scissors: 2, paper: 1]
-    case win[w1] - win[w2] do
-      1 -> :p1
-      -1 -> :p2
-      2 -> :p2
-      -2 -> :p1
-    end
+    get_winner(w1, w2)
   end
 end
