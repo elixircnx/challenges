@@ -20,9 +20,9 @@ defmodule RockPaperScissors do
   """
 
   permutations = [{:rock, :scissors}, {:scissors, :paper}, {:paper, :rock}]
-  for {tool, weapon} <- permutations do
-    defp get_winner(unquote(tool), unquote(weapon)), do: :p1
-    defp get_winner(unquote(weapon), unquote(tool)), do: :p2
+  for {winner, loser} <- permutations do
+    defp get_winner(unquote(winner), unquote(loser)), do: :p1
+    defp get_winner(unquote(loser), unquote(winner)), do: :p2
   end
   defp get_winner(_, _) do
     raise ArgumentError, message: "Massive failure."
